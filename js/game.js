@@ -1,14 +1,14 @@
 window.addEventListener("load", function () {
   // ========== MODEL ==========
 
-  var connections = 0;
-  var clickValue = 1;
-  var totalUpgradesOwned = 0;
+  let connections = 0;
+  let clickValue = 1;
+  let totalUpgradesOwned = 0;
 
   var upgrades = [
-    { name: "LinkedIn App", desc: "+1 per click", bonus: 1, baseCost: 10, multiplier: 1.5, owned: 0 },
-    { name: "Network Person", desc: "+5 per click", bonus: 5, baseCost: 50, multiplier: 1.5, owned: 0 },
-    { name: "Computer Access", desc: "+25 per click", bonus: 25, baseCost: 250, multiplier: 1.5, owned: 0 }
+    { name: "LinkedIn App", desc: "+0.1/click", bonus: 0, perSec: 0.1, baseCost: 15, multiplier: 1.5, owned: 0 },
+    { name: "Network Person", desc: "+0.5/sec", bonus: 0, perSec: 0.5, baseCost: 50, multiplier: 1.5, owned: 0 },
+    { name: "Computer Access", desc: "+1/sec", bonus: 0, perSec: 1, baseCost: 250, multiplier: 1.5, owned: 0 }
   ];
 
   // ========== DOM REFERENCES ==========
@@ -27,13 +27,21 @@ window.addEventListener("load", function () {
     return Math.floor(u.baseCost * Math.pow(u.multiplier, u.owned));
   }
 
+  function getPerSecond() {
+    var total = 0;
+    for (var i = 0; i < upgrades.length; i++) {
+      total += upgrades[i].perSec * upgrades[i].owned;
+    }
+    return total;
+  }
+
   // ========== VIEW ==========
 
   function updateView() {
-    consDisplay.textContent = "Connections: " + connections;
+    consDisplay.textContent = "Connections: " + Math.round(connections);
     clickValueDisplay.textContent = "Per click: " + clickValue;
     upgradesOwnedDisplay.textContent = "Upgrades owned: " + totalUpgradesOwned;
-    cpsDisplay.textContent = "Per second: 0";
+    cpsDisplay.textContent = "Per second: " + getPerSecond();
 
     var buttons = upgradesList.querySelectorAll(".upgrade-btn");
     for (var i = 0; i < upgrades.length; i++) {
@@ -62,7 +70,7 @@ window.addEventListener("load", function () {
 
   networkBtn.addEventListener("click", function () {
     connections += clickValue;
-    clickFeedback.textContent = "+" + clickValue + " connections!";
+    clickFeedback.textContent = "+" + Math.round(clickValue) + " connections!";
     updateView();
   });
 
@@ -84,4 +92,12 @@ window.addEventListener("load", function () {
 
   buildUpgradeButtons();
   updateView();
+
+  setInterval(function () {
+    var cps = getPerSecond();
+    if (cps > 0) {
+      connections += cps;
+      updateView();
+    }
+  }, 1000);
 });

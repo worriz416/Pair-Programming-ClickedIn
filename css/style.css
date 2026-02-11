@@ -50,15 +50,42 @@ main {
   width: 140px;
   height: 140px;
   border-radius: 50%;
+  border: 2px solid #0073b1;
+  background: #12122a;
+  color: #00b4d8;
+  font-size: 1.1rem;
+  font-weight: 700;
   cursor: pointer;
+}
+
+#upgrades-list {
+  list-style: none;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
 }
 
 .upgrade-btn {
   width: 100%;
+  padding: 0.6rem 0.8rem;
+  background: #161630;
+  border: 1px solid #2a2a50;
+  border-radius: 6px;
+  color: #e0e0e0;
+  text-align: left;
+  cursor: pointer;
 }
+
 .upgrade-btn:disabled {
   opacity: 0.4;
+  cursor: not-allowed;
 }
+
+.upgrade-name { display: block; font-weight: 700; }
+.upgrade-desc { display: block; font-size: 0.85rem; color: #999; }
+.upgrade-cost { display: block; font-size: 0.85rem; color: #00b4d8; }
+.upgrade-owned { display: block; font-size: 0.8rem; color: #777; }
 .reward-badge {
   opacity: 0.4;
 }
