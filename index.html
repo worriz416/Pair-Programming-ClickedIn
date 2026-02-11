@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ClickedIn - Networking Incremental Game</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <header>
+    <h1>ClickedIn</h1>
+  </header>
+
+  <section id="scoreboard">
+    <div id="score-stats">
+      <p id="connections-display">Connections: 0</p>
+      <p id="click-value-display">Per click: 1</p>
+      <p id="upgrades-owned-display">Upgrades owned: 0</p>
+      <p id="cps-display">Per second: 0</p>
+    </div>
+    <div id="progress-bar-container">
+      <div id="progress-bar"></div>
+      <span id="progress-label">Next milestone: 1</span>
+    </div>
+  </section>
+
+  <main>
+    <section id="click-area">
+      <button id="network-btn">Network!</button>
+      <p id="click-feedback"></p>
+    </section>
+
+    <section id="upgrades-area">
+      <h2>Upgrades</h2>
+      <ul id="upgrades-list"></ul>
+    </section>
+
+    <section id="rewards-area">
+      <h2>Rewards</h2>
+      <div id="rewards-list"></div>
+    </section>
+  </main>
+
+  <script src="js/game.js"></script>
+</body>
+</html>
