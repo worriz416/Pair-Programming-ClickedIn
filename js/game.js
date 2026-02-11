@@ -1,37 +1,30 @@
 window.addEventListener("load", function () {
   // ========== MODEL ==========
 
-  let connections = 0;
-  let clickValue = 10;
-  let totalUpgradesOwned = 0;
+  var connections = 0;
+  var clickValue = 1;
+  var totalUpgradesOwned = 0;
 
-  const upgrades = [
-    { name: "LinkedIn App", desc: "+1 per click", bonus: 1, baseCost: 10, multiplier: 1.5, owned: 0 }
+  var upgrades = [
+    { name: "LinkedIn App", desc: "+1 per click", bonus: 1, baseCost: 10, multiplier: 1.5, owned: 0 },
+    { name: "Network Person", desc: "+5 per click", bonus: 5, baseCost: 50, multiplier: 1.5, owned: 0 },
+    { name: "Computer Access", desc: "+25 per click", bonus: 25, baseCost: 250, multiplier: 1.5, owned: 0 }
   ];
-  const milestones = [1, 50, 500, 5000];
 
   // ========== DOM REFERENCES ==========
 
-  const consDisplay = document.getElementById("connections-display");
-  const clickValueDisplay = document.getElementById("click-value-display");
-  const upgradesOwnedDisplay = document.getElementById("upgrades-owned-display");
-  const cpsDisplay = document.getElementById("cps-display");
-
-  const networkBtn = document.getElementById("network-btn");
-  const clickFeedback = document.getElementById("click-feedback");
-  const upgradesList = document.getElementById("upgrades-list");
-  const rewardsList = document.getElementById("rewards-list");
+  var consDisplay = document.getElementById("connections-display");
+  var clickValueDisplay = document.getElementById("click-value-display");
+  var upgradesOwnedDisplay = document.getElementById("upgrades-owned-display");
+  var cpsDisplay = document.getElementById("cps-display");
+  var networkBtn = document.getElementById("network-btn");
+  var clickFeedback = document.getElementById("click-feedback");
+  var upgradesList = document.getElementById("upgrades-list");
 
   // ========== HELPERS ==========
 
-  const getCost = (u) => Math.floor(u.baseCost * Math.pow(u.multiplier, u.owned));
-
-  function checkRewards() {
-    for (var i = 0; i < rewards.length; i++) {
-      if (!rewards[i].earned && rewards[i].check()) {
-        rewards[i].earned = true;
-      }
-    }
+  function getCost(u) {
+    return Math.floor(u.baseCost * Math.pow(u.multiplier, u.owned));
   }
 
   // ========== VIEW ==========
@@ -41,13 +34,17 @@ window.addEventListener("load", function () {
     clickValueDisplay.textContent = "Per click: " + clickValue;
     upgradesOwnedDisplay.textContent = "Upgrades owned: " + totalUpgradesOwned;
     cpsDisplay.textContent = "Per second: 0";
-  }
 
-  function displayUpgrades() {
-    for (const u of upgrades) {
-      const li = document.createElement("li");
-      li.innerHTML = `<span class="upgrade-name">${u.name}</span>`;
-      upgradesList.appendChild(li);
+    var buttons = upgradesList.querySelectorAll(".upgrade-btn");
+    for (var i = 0; i < upgrades.length; i++) {
+      var u = upgrades[i];
+      var cost = getCost(u);
+      buttons[i].disabled = connections < cost;
+      buttons[i].innerHTML =
+        '<span class="upgrade-name">' + u.name + '</span>' +
+        '<span class="upgrade-desc">' + u.desc + '</span>' +
+        '<span class="upgrade-cost">Cost: ' + cost + '</span>' +
+        '<span class="upgrade-owned">Owned: ' + u.owned + '</span>';
     }
   }
 
@@ -80,15 +77,11 @@ window.addEventListener("load", function () {
     u.owned++;
     totalUpgradesOwned++;
     clickValue += u.bonus;
-
-    checkRewards();
     updateView();
   });
 
   // ========== INIT ==========
 
   buildUpgradeButtons();
-  buildRewardBadges();
   updateView();
-  displayUpgrades();
 });
