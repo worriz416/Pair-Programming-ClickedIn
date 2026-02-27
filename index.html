@@ -1,3 +1,9 @@
+<!--
+  Liam Klein
+  2/25/2026
+  HTML File for ClickedIn game, includes layout and structure for game components
+-->
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -9,14 +15,31 @@
 <body>
   <header>
     <h1>ClickedIn</h1>
+    <button id="help-btn" title="Click for help">?</button>
   </header>
 
   <section id="scoreboard">
     <div id="score-stats">
-      <p id="connections-display">Connections: 0</p>
-      <p id="click-value-display">Per click: 1</p>
-      <p id="upgrades-owned-display">Upgrades owned: 0</p>
-      <p id="cps-display">Per second: 0</p>
+      <div class="stat-card">
+        <div class="stat-icon">🤝</div>
+        <div class="stat-label">Connections</div>
+        <div id="connections-display" class="stat-value">0</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-icon">⚡</div>
+        <div class="stat-label">Per Click</div>
+        <div id="click-value-display" class="stat-value">1</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-icon">⏱️</div>
+        <div class="stat-label">Per Second</div>
+        <div id="cps-display" class="stat-value">0</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-icon">📦</div>
+        <div class="stat-label">Upgrades Owned</div>
+        <div id="upgrades-owned-display" class="stat-value">0</div>
+      </div>
     </div>
     <div id="progress-bar-container">
       <div id="progress-bar"></div>
@@ -40,6 +63,34 @@
       <div id="rewards-list"></div>
     </section>
   </main>
+
+  <div id="help-modal" class="modal hidden">
+    <div class="modal-content">
+      <button id="close-help" class="close-btn">×</button>
+      <h2>How to Play</h2>
+      <section class="help-section">
+        <h3>📖 Instructions</h3>
+        <p>Click the <strong>Network!</strong> button to earn connections. Use connections to buy upgrades that increase your earnings per click or per second.</p>
+        <ul>
+          <li><strong>Connections:</strong> Your main resource earned by clicking or through upgrades</li>
+          <li><strong>Per Click:</strong> The amount of connections you get from each click</li>
+          <li><strong>Per Second:</strong> The amount of connections you earn automatically each second</li>
+          <li><strong>Upgrades:</strong> Improvements that increase your earnings</li>
+          <li><strong>Rewards:</strong> Achievements you unlock by reaching milestones</li>
+        </ul>
+      </section>
+
+      <section class="help-section">
+        <h3>🛍️ Available Upgrades</h3>
+        <div id="help-upgrades"></div>
+      </section>
+
+      <section class="help-section">
+        <h3>🏆 Available Rewards</h3>
+        <div id="help-rewards"></div>
+      </section>
+    </div>
+  </div>
 
   <script src="js/game.js"></script>
 </body>
