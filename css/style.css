@@ -209,7 +209,7 @@ main {
 .floating-feedback {
   position: absolute;
   top: -90px;
-  left: 50%;
+  left: 58%;
   transform: translateX(-50%);
   font-size: 1.8rem;
   font-weight: 700;
