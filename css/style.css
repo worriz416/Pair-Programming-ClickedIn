@@ -75,7 +75,7 @@ h1 {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  padding: 0.8rem;
+  padding: 0.2rem;
   background: #12122a;
   border: 2px solid #2a2a50;
   border-radius: 10px;
@@ -90,8 +90,8 @@ h1 {
 }
 
 .stat-icon {
-  font-size: 2rem;
-  margin-bottom: 0.3rem;
+  font-size: 1.5rem;
+  margin-bottom: 0.1rem;
 }
 
 .stat-label {
@@ -99,11 +99,11 @@ h1 {
   color: #999;
   text-transform: uppercase;
   letter-spacing: 0.5px;
-  margin-bottom: 0.3rem;
+  margin-bottom: 0.2rem;
 }
 
 .stat-value {
-  font-size: 1.4rem;
+  font-size: 1.2rem;
   font-weight: 700;
   color: #00b4d8;
 }
@@ -132,7 +132,7 @@ h1 {
 
 main {
   display: grid;
-  grid-template-columns: 1fr 1.5fr;
+  grid-template-columns: 1fr 1.5fr 0.4fr;
   gap: 0.8rem;
   max-width: 1200px;
   margin: 0 auto;
@@ -142,6 +142,7 @@ main {
 #click-area { 
   text-align: center;
   position: relative;
+  grid-column: 1;
   grid-row: 1 / 3;
   display: flex;
   flex-direction: column;
@@ -157,6 +158,8 @@ main {
   min-height: 250px;
   max-height: 300px;
   overflow-y: auto;
+  grid-column: 2;
+  grid-row: 1 / 3;
 }
 
 #upgrades-area::-webkit-scrollbar {
@@ -227,7 +230,7 @@ main {
   }
   100% {
     opacity: 0;
-    transform: translateX(-50%) translateY(-250px);
+    transform: translateX(-50%) translateY(-150px);
   }
 }
 
@@ -276,12 +279,12 @@ main {
 }
 
 #rewards-area {
-  grid-column: 1 / -1;
+  grid-column: 3;
+  grid-row: 1 / 3;
   padding: 1rem;
   background: linear-gradient(135deg, #161630 0%, #1a1a2e 100%);
   border: 2px solid #0073b1;
   border-radius: 8px;
-  box-shadow: 0 4px 15px rgba(0, 115, 177, 0.2);
 }
 
 #rewards-area h2 {
@@ -294,9 +297,9 @@ main {
 }
 
 #rewards-list {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.7rem;
+  display: grid;
+  grid-template-columns: repeat(2, auto);
+  gap: 0.5rem;
 }
 
 .reward-item {
